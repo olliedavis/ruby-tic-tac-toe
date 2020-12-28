@@ -9,7 +9,7 @@ def board_display
 end
 
 def player_x_selection
-  puts "Crosses Turn! "
+  puts "Crosses Turn! Please enter a number "
   x_choice = gets.chomp.to_i
   if board_check(x_choice, "x") == false
     puts "Please enter a number between 1 and 9, that hasn't already been taken"
@@ -24,7 +24,7 @@ def player_x_selection
 end
 
 def player_o_selection
-  puts "Naughts Turn!"
+  puts "Naughts Turn! Please enter a number"
   o_choice = gets.chomp.to_i
   if board_check(o_choice, "o") == false
     puts "Please enter a number between 1 and 9, that hasn't already been taken"
@@ -50,7 +50,6 @@ def board_check(choice, user)
         $current_board[0][0] = "O"
         $current_board[3][0] = "O"
         $current_board[6][0] = "O"
-
     else
       false
     end
@@ -177,7 +176,9 @@ def o_win?
 end
 
 def start_game
-  puts "Welcome to my game! This is just a two player game of Tic-Tac-Toe, or Naughts and Crosses. Please find the board below, you just need to enter a number between 1 and 9 to pick a square."
+  puts "Welcome to my game!"
+  puts "This is just a two player game of Tic-Tac-Toe, or Naughts and Crosses."
+  puts "Please find the board below, you just need to enter a number between 1 and 9 to pick a square."
   puts board_display
   player_x_selection
 end
