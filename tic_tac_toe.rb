@@ -11,22 +11,30 @@ end
 def player_x_selection
   puts "Crosses Turn! "
   x_choice = gets.chomp.to_i
-  board_check(x_choice, "x")
+  if board_check(x_choice, "x") == false
+    puts "Please enter a number between 1 and 9, that hasn't already been taken"
+    player_x_selection
+  end
   puts board_display
   if x_win? == true
-    return
-  else player_o_selection
+    play_again?
+  else 
+    player_o_selection
   end
 end
 
 def player_o_selection
   puts "Naughts Turn!"
   o_choice = gets.chomp.to_i
-  board_check(o_choice, "o")
+  if board_check(o_choice, "o") == false
+    puts "Please enter a number between 1 and 9, that hasn't already been taken"
+    player_o_selection
+  end
   puts board_display
   if o_win? == true
-    return
-  else player_x_selection
+    play_again?
+  else 
+    player_x_selection
   end
 end
 
@@ -152,13 +160,13 @@ end
 
 def x_win?
   x_win = ["X", "X", "X"]
-
   case x_win
   when $current_board[0], $current_board[1], $current_board[2], $current_board[3], $current_board[4], $current_board[5], $current_board[6], $current_board[7]
     puts "X Wins!"
     true
   end
 end
+
 def o_win?
   o_win = ["O", "O", "O"]
   case o_win
