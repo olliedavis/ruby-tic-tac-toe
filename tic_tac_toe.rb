@@ -23,10 +23,6 @@ def player_o_selection
   puts "Naughts Turn!"
   o_choice = gets.chomp.to_i
   board_check(o_choice, "o")
-  if board_check(x_choice, "o") == false
-    puts "Please enter a number between 1 and 9, that hasn't already been taken"
-    player_o_selection
-  end
   puts board_display
   if o_win? == true
     return
