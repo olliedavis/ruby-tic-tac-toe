@@ -2,7 +2,7 @@ class TicTacToe
   attr_accessor :board
 
   def initialize
-    @board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   end
 
   WINNING_COMBOS = [
@@ -13,14 +13,14 @@ class TicTacToe
     [1, 4, 7],
     [2, 5, 8],
     [2, 4, 6],
-    [0, 4, 8],
+    [0, 4, 8]
   ]
 
   def board_display
     puts "  #{@board[0]} | #{@board[1]} | #{@board[2]} "
-    puts " ----------- "
+    puts ' ----------- '
     puts "  #{@board[3]} | #{@board[4]} | #{@board[5]} "
-    puts " -----------"
+    puts ' ----------- '
     puts "  #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
 
@@ -33,15 +33,15 @@ class TicTacToe
   end
 
   def position_taken?(input)
-    @board[input] == "X" or @board[input] == "O"
+    @board[input] == 'X' or @board[input] == 'O'
   end
 
   def valid_move?(input)
-    input.between?(0,8) and !position_taken?(input)
+    input.between?(0, 8) and position_taken?(input) == false
   end
 
   def turn
-    puts "Choose a position between 1 and 9"
+    puts 'Choose a position between 1 and 9'
     position = gets.strip
     position = input_to_index(position)
     if valid_move?(position)
@@ -56,28 +56,24 @@ class TicTacToe
   def turn_count
     taken = 0
     @board.each do |i|
-      if i == "X" or i == "O"
-        taken += 1
-      end
+      taken += 1 if %w[X O].include?(i)
     end
-    return taken
+    taken
   end
 
   def current_player
-    player = nil
-    if turn_count() % 2 == 0
-      player = "X"
+    if turn_count.even?
+      'X'
     else
-      player = "O"
+      'O'
     end
-    return player
   end
 
   def won?
     WINNING_COMBOS.find do |combo|
       @board[combo[0]] == @board[combo[1]] and
-      @board[combo[1]] == @board[combo[2]] and
-      position_taken?(combo[0])
+        @board[combo[1]] == @board[combo[2]] and
+        position_taken?(combo[0])
     end
   end
 
@@ -89,7 +85,7 @@ class TicTacToe
     !won? and full?
   end
 
-  def over? 
+  def over?
     won? or full? or draw?
   end
 
@@ -100,9 +96,7 @@ class TicTacToe
   end
 
   def play
-    until over?
-      turn
-    end
+    turn until over?
 
     if won?
       winner = winner()
@@ -114,16 +108,15 @@ class TicTacToe
   end
 
   def play_again?
-    puts "Do you want to play again? [Yes] or [No]"
+    puts 'Do you want to play again? [Yes] or [No]'
     again = gets.strip.downcase
-    if again == "yes"
+    if again == 'yes'
       game_start
     else
-      puts ":("
+      puts ':('
     end
   end
 end
-
 
 def game_start
   game = TicTacToe.new
