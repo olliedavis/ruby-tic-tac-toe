@@ -122,5 +122,3 @@ def game_start
   game = TicTacToe.new
   game.play
 end
-
-game_start
