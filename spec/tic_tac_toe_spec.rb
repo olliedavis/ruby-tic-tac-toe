@@ -16,4 +16,18 @@ describe TicTacToe do
       expect{ tictactoe.move(0) }.to change{ tictactoe.board[0] }.from(' ').to('X')
     end
   end
+
+  describe '#position_taken?' do
+    before do
+      tictactoe.board[0] = 'X'
+    end
+
+    it 'returns true if position is taken' do
+      expect(tictactoe.position_taken?(0)).to be true
+    end
+
+    it 'returns false if position is not taken' do
+      expect(tictactoe.position_taken?(1)). to be false
+    end
+  end
 end
