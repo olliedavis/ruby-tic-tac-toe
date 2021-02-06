@@ -32,4 +32,14 @@ describe TicTacToe do
     end
   end
 
+  describe 'turn_count' do
+    before do
+      tictactoe.board[5] = 'X'
+      tictactoe.board[6] = 'O'
+    end
+
+    it 'increments the taken counter when a position is taken' do
+      expect(tictactoe.turn_count).to eq(2)
+    end
+  end
 end
