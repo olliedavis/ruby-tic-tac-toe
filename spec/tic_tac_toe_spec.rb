@@ -4,8 +4,10 @@ describe TicTacToe do
   subject(:tictactoe) { described_class.new }
 
   describe 'move' do
-    it 'updates the board with the new move' do
-      expect{ tictactoe.move(0) }.to change{ tictactoe.board[0] }.from(' ').to('X')
+    context 'when a move has been made' do
+      it 'it updates the board' do
+        expect{ tictactoe.move(0) }.to change{ tictactoe.board[0] }.from(' ').to('X')
+      end
     end
   end
 
@@ -14,32 +16,49 @@ describe TicTacToe do
       tictactoe.board[0] = 'X'
     end
 
-    it 'returns true if position is taken' do
-      expect(tictactoe.position_taken?(0)).to be true
+    context 'when the position has already been taken' do
+      it 'returns true' do
+        expect(tictactoe.position_taken?(0)).to be true
+      end
     end
 
-    it 'returns false if position is not taken' do
-      expect(tictactoe.position_taken?(1)).to be false
+    context 'when the position has not been taken' do
+      it 'returns false' do
+        expect(tictactoe.position_taken?(1)).to be false
+      end
     end
   end
 
   describe 'valid_move?' do
-    it 'returns true if the move is valid' do
-      expect(tictactoe.valid_move?(4)).to be true
+    context 'when the move is valid' do
+      it 'returns true' do
+        expect(tictactoe.valid_move?(4)).to be true
+      end
     end
-    it 'returns false if the move is false' do
-      expect(tictactoe.valid_move?(15)).to be false
+
+    context 'when the move is invalid' do
+      it 'returns false' do
+        expect(tictactoe.valid_move?(15)).to be false
+      end
     end
   end
 
   describe 'turn_count' do
-    before do
-      tictactoe.board[5] = 'X'
-      tictactoe.board[6] = 'O'
+    context 'when positions have been taken' do
+      before do
+        tictactoe.board[5] = 'X'
+        tictactoe.board[6] = 'O'
+      end
+
+      it 'increments the taken counter' do
+        expect(tictactoe.turn_count).to eq(2)
+      end
     end
 
-    it 'increments the taken counter when a position is taken' do
-      expect(tictactoe.turn_count).to eq(2)
+    context 'when no positions have been taken' do
+      it "doesn't increment the counter" do
+        expect(tictactoe.turn_count).to eq(0)
+      end
     end
   end
 end
