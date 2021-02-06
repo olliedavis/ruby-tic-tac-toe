@@ -19,7 +19,7 @@ describe TicTacToe do
     end
 
     it 'returns false if position is not taken' do
-      expect(tictactoe.position_taken?(1)). to be false
+      expect(tictactoe.position_taken?(1)).to be false
     end
   end
 
@@ -31,5 +31,5 @@ describe TicTacToe do
       expect(tictactoe.valid_move?(15)).to be false
     end
   end
-  
+
 end
